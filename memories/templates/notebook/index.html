@@ -1,0 +1,41 @@
+{% extends 'notebook/base.html' %}
+{% block content %}
+
+{% for memory in memories %}
+<div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+    <img src="/media/{{memory.writer.profile.avatar}}" alt="Avatar" class="w3-right w3-circle w3-margin-left"
+         style="width:60px">
+    <h4>{{memory.writer}}</h4><br>
+    <hr class="w3-clear">
+    <p>{{memory.text}}</p>
+    <hr class="w3-clear">
+    <div class="w3-row-padding" style="margin:0 -16px">
+        <div class="w3-half">
+            <img src="/media/{{memory.image}}" style="width:100%" alt="Northern Lights" class="w3-margin-bottom">
+        </div>
+    </div>
+    <hr class="w3-clear">
+    <a href="{% url 'memories:memory' memory.id %}"
+       class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-pencil"></i>  دیدن این خاطره
+    </a>
+    {% if request.user.is_authenticated and request.user == memory.writer %}
+    <a href="{% url 'memories:edit_memory' memory.id %}"
+       class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-pencil"></i>  ویرایش کردن این خاطره
+    </a>
+    {% endif %}
+    {{memory.history}}
+</div>
+{% empty %}
+<div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+    <p>هنوز خاطره ای ثبت نشده !</p>
+</div>
+<a href="{% url 'memories:new_memory' %}"
+   class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-pencil"></i>  ثبت خاطره ای جدید
+    ها
+</a>
+{% endfor %}
+<!-- End Middle Column -->
+
+<br>
+{% endblock %}
+

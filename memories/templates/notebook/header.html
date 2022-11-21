@@ -1,0 +1,58 @@
+{% load static %}
+<!-- Navbar -->
+<div class="w3-top">
+    <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
+        <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2"
+           href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
+        <a href="{% url 'memories:memorys' %}" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i
+                class="fa fa-home w3-margin-right"></i>دفترچه خاطرات</a>
+        <a href="{% url 'memories:home' %}"
+           class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="همه خاطرات"><i
+                class="fa fa-globe"></i></a>
+        <a href="{% url 'memories:edit_profile'%}"
+           class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="ویرایش پروفایل"><i
+                class="fa fa-user"></i></a>
+        <a href="{% url 'memories:new_memory'%}"
+           class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
+           title="ثبت خاطره ی جدید"><i class="fa fa-envelope"></i></a>
+        {% if request.user.is_authenticated %}
+        <a href="{% url 'memories:memorys' %}"
+           class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="My Account">
+            <img src="/media/{{profile1.avatar}}" class="w3-circle" style="height:23px;width:23px" alt="Avatar">
+        </a>
+
+        <b class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white">{{request.user.first_name}}عزیر
+            به صفحه ی خاطرات خوش آمدی </b>
+        <a href="{% url 'users:logout' %}"
+           class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white"
+           title="My Account">خروج</a>
+        {% else %}
+        <a href="{% url 'users:login' %}"
+           class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white"
+           title="My Account">ورود</a>
+        <a href="{% url 'users:register' %}"
+           class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white"
+           title="My Account">ثبتنام</a>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Navbar on small screens -->
+{% if request.user.is_authenticated %}
+<div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
+
+    <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 1</a>
+    <b class="w3-bar-item w3-button w3-padding-large">{{request.user.first_name}}عزیر
+        به صفحه ی خاطرات خوش آمدی </b>
+    <a href="{% url 'memories:home' %}" class="w3-bar-item w3-button w3-padding-large">همه خاطرات</a>
+    <a href="{% url 'memories:new_memory'%}" class="w3-bar-item w3-button w3-padding-large">ثبت خاطره ی جدید</a>
+    <a href="{% url 'memories:edit_profile'%}" class="w3-bar-item w3-button w3-padding-large">ویرایش پروفایل</a>
+    <a href="{% url 'users:logout' %}"
+       class="w3-bar-item w3-button w3-padding-large" title="My Account">خروج</a>
+</div>
+{% else %}
+<a href="#" class="w3-bar-item w3-button w3-padding-large">Link 1</a>
+<a href="{% url 'users:login' %}" class="w3-bar-item w3-button w3-padding-large">ورود</a>
+<a href="{% url 'users:register' %}" class="w3-bar-item w3-button w3-padding-large">ثبت نام</a>
+<a href="{% url 'memories:home' %}" class="w3-bar-item w3-button w3-padding-large">همه خاطرات</a>
+{% endif %}

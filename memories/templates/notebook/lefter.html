@@ -1,0 +1,85 @@
+{% load static %}
+<!-- Left Column -->
+<div class="w3-col m3">
+    <!-- Profile -->
+    {% if request.user.is_authenticated %}
+    <div class="w3-card w3-round w3-white">
+        <div class="w3-container">
+            <h4 class="w3-center">پروفایل من</h4>
+            <p class="w3-center"><img src="/media/{{profile1.avatar}}" class="w3-circle"
+                                      style="height:106px;width:106px"></p>
+            <hr>
+            <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> {{profile1.job}}</p>
+            <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> {{profile1.place}}</p>
+            <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> {{profile1.birthday}}</p>
+            <a href="{% url 'memories:edit_profile'%}"
+               class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-pencil"></i>  ویرایش پروفایل
+            </a>
+        </div>
+    </div>
+    <br>
+    {% endif %}
+
+
+    <!-- Accordion -->
+    {% if request.user.is_authenticated %}
+    <div class="w3-card w3-round">
+        <div class="w3-white">
+            <button onclick="myFunction('Demo3')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i
+                    class="fa fa-users fa-fw w3-margin-right"></i> My Photos
+            </button>
+            <div id="Demo3" class="w3-hide w3-container">
+                <div class="w3-row-padding">
+                    <br>
+                    <div class="w3-half">
+                        {% for ph in memoryph %}
+                        <img src="/media/{{ph.image}}" style="width:100%" class="w3-margin-bottom">
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    {% endif %}
+
+
+    <!-- Interests -->
+    <div class="w3-card w3-round w3-white w3-hide-small">
+        <div class="w3-container">
+            {% if request.user.is_authenticated %}
+            <p>علاقه مندی ها</p>
+            <p>
+                {% for tag in tags %}
+                <span class="w3-tag w3-small w3-theme-d5">{{tag.tag}}</span>
+                {% endfor %}
+                <a href="{% url 'memories:edit_interest' %}"
+                   class="w3-button w3-theme-d1 w3-margin-bottom w3-margin-top"><i class="fa fa-pencil"></i>  ویرایش
+                    کردن علاقه مندی
+                    ها
+                </a>
+                {% else %}
+                {% for memory in memory13 %}
+            <div class="w3-card w3-round w3-white w3-center">
+                <div class="w3-container">
+                    <p>جدید ترین خاطره ها:</p>
+                    <img src="/media/{{memory.image}}" alt="Forest" style="width:100%;">
+                    <p><strong>{{memory.title}}</strong></p>
+                    <p>{{memory.history}}</p>
+                    <a href="{% url 'memories:memory' memory.id %}"
+                       class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-pencil"></i>  دیدن این خاطره
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+            </p>
+            <a href="{% url 'users:login' %}"
+               class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-pencil"></i>  لطفا وارد شوید
+            </a>
+            {% endif %}
+
+        </div>
+    </div>
+    <br>
+    <!-- End Left Column -->
+</div>

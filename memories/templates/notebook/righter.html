@@ -1,0 +1,17 @@
+{% load static %}
+<!-- Right Column -->
+<div class="w3-col m2">
+    <div class="w3-card w3-round w3-white w3-center">
+        <div class="w3-container">
+            <p>جدید ترین خاطره:</p>
+            <img src="/media/{{lastm.image}}" alt="Forest" style="width:100%;">
+            <p><strong>{{lastm.title}}</strong></p>
+            <p>{{lastm.history}}</p>
+            <a href="{% url 'memories:memory' lastm.id %}"
+               class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-pencil"></i>  دیدن این خاطره
+            </a>
+        </div>
+    </div>
+    <br>
+    <!-- End Right Column -->
+</div>

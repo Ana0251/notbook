@@ -1,0 +1,16 @@
+{% extends 'notebook/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+{% if request.user.is_authenticated %}
+<form enctype="multipart/form-data" action="{% url 'memories:new_memory' %}" method="post">
+    <h2>ثبت یک خاطره جدید</h2>
+    {% csrf_token %}
+    {{form | crispy}}
+    <button type="submit" class="w3-button w3-theme"><i class="fa fa-pencil"></i>  ثبت خاطره</button>
+</form>
+{% else %}
+<h2>دسترسی شما به این صفحه مجاز نیس</h2>
+<h6> برای ورود <a href="{% url 'users:login' %}">اینحا</a> کلیک کنید</h6>
+<h6> برای ثبت نام <a href="{% url 'users:register' %}">اینحا</a> کلیک کنید</h6>
+{% endif %}
+{% endblock content %}

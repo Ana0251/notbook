@@ -1,0 +1,27 @@
+{% extends 'notebook/base.html' %}
+{% block content %}
+{% if request.user.is_authenticated %}
+
+{% else %}
+<form method="post">
+    {% csrf_token %}
+    <p>
+        <label for="id_username">نام کاربری:</label>
+        <input type="text" name="username" autofocus autocapitalize="none" autocomplete="username" maxlength="150"
+               required id="id_username">
+
+
+    </p>
+
+
+    <p>
+        <label for="id_password">رمز عبور:</label>
+        <input type="password" name="password" autocomplete="current-password" required id="id_password">
+
+
+    </p>
+    <button type="submit">ورود</button>
+</form>
+<h6> برای ثبت نام <a href="{% url 'users:register' %}">اینحا</a> کلیک کنید</h6>
+{% endif %}
+{% endblock %}

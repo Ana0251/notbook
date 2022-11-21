@@ -1,0 +1,72 @@
+{% extends 'notebook/base.html' %}
+{% block content %}
+{% if request.user.is_authenticated %}
+
+{% else %}
+<form method="post">
+    {% csrf_token %}
+    <p>
+        <label for="id_first_name">نام :</label>
+        <input type="text" name="first_name" maxlength="20" required id="id_first_name">
+
+
+    </p>
+
+
+    <p>
+        <label for="id_last_name">نام خانوادگی:</label>
+        <input type="text" name="last_name" maxlength="20" required id="id_last_name">
+
+
+    </p>
+
+
+    <p>
+        <label for="id_username">نام کاربری :</label>
+        <input type="text" name="username" maxlength="20" autofocus required id="id_username">
+
+        <span class="helptext">ضروری: 20 کاراکتر یا کمتر. فقط حروف، ارقام و @/./+/-/_</span>
+
+
+    </p>
+
+
+    <p>
+        <label for="id_password1">رمز ورود:</label>
+        <input type="password" name="password1" autocomplete="new-password" required id="id_password1">
+
+        <span class="helptext">
+    <ul>
+        <li>رمز عبور شما نمی تواند خیلی شبیه سایر اطلاعات شخصی شما باشد.</li>
+        <li>رمز عبور شما باید حداقل 8 کاراکتر داشته باشد.</li>
+        <li>رمز عبور شما نمی تواند یک رمز عبور رایج باشد.</li>
+        <li>رمز عبور شما نمی تواند کاملاً عددی باشد.</li>
+    </ul>
+    </span>
+
+
+    </p>
+
+
+    <p>
+        <label for="id_password2">نکرار رمز ورود :</label>
+        <input type="password" name="password2" autocomplete="new-password" required id="id_password2">
+
+        <span class="helptext">برای تایید همان رمز عبور قبلی را وارد کنید.</span>
+
+
+    </p>
+
+
+    <p>
+        <label for="id_email">ایمیل:</label>
+        <input type="email" name="email" maxlength="250" required id="id_email">
+
+        <span class="helptext">به عنوان مثال. youremail@gmail.com</span>
+
+
+    </p>
+    <button type="submit">ثبت نام</button>
+</form>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'notebook/base.html' %}
+{% block content %}
+
+<h2 style="margin-bottom: 0px">{{memory.title}}</h2><br/>
+<h6>{{memory.place}}</h6>
+<p class="w3-border w3-padding">{{memory.writer}}: <br/> {{memory.text}}</p>
+<h6>هم خاطره هام:</h6>
+<p class="w3-border w3-padding">{{memory.ftravel}}</p>
+<h6>تاریخ خاطره :</h6>
+<p class="w3-border w3-padding">{{memory.history}}</p>
+<img src="/media/{{memory.image}}" alt="my history" style="width:100%;border-radius: 10%"
+     alt="Northern Lights"
+     class="w3-margin-bottom">
+<h6>{{memory.create}}</h6>
+{% if request.user.is_authenticated and request.user == memory.writer %}
+<a href="{% url 'memories:edit_memory' memory.id %}"
+   class="w3-button w3-theme"><i class="fa fa-pencil"></i>  ویرایش کردن این خاطره
+</a>
+{% endif %}
+<br/>
+{% if request.user.is_authenticated %}
+<form method="post">
+    {% csrf_token %}
+    <h3>نظرات:</h3>
+    {{form.as_p}}
+    <button type="submit">ثبت نظر</button>
+{% endif %}
+</form>
+{% for comment in comments %}
+<p class="w3-border w3-padding">{{comment.writer}}<br/>{{comment.comment}}<br/>
+    {% if update %}
+    {{comment.update}}
+    {% else %}
+    {{comment.create}}
+    {% endif %}
+</p>
+{% empty %}
+<p class="w3-border w3-padding">هنوز نظری ثبت نشده است !!</p>
+{% endfor %}
+
+
+{% endblock content %}

@@ -1,0 +1,16 @@
+{% extends 'notebook/base.html' %}
+{% block content %}
+{% if request.user.is_authenticated and request.user == memory.writer %}
+<form enctype="multipart/form-data" action="{% url 'memories:edit_memory' memory.id%}" method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+
+    <button type="submit">ثبت ویرایش</button>
+
+</form>
+{% else %}
+<h2>دسترسی شما به این صفحه مجاز نیس</h2>
+<h6> برای ورود <a href="{% url 'users:login' %}">اینحا</a> کلیک کنید</h6>
+<h6> برای ثبت نام <a href="{% url 'users:register' %}">اینحا</a> کلیک کنید</h6>
+{% endif %}
+{% endblock content %}

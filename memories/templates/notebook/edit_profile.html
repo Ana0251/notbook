@@ -1,0 +1,8 @@
+{% extends 'notebook/base.html' %}
+{% block content %}
+<form enctype="multipart/form-data" action="{% url 'memories:edit_profile'%}" method="post">
+  {% csrf_token %}
+  {{form.as_p}}
+  <button type="submit" class="w3-button w3-theme"><i class="fa fa-pencil"></i>  ثبت ویرایش</button>
+</form>
+{% endblock content %}
